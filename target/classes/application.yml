@@ -1,0 +1,19 @@
+spring:
+  ldap:
+    urls: ldap://172.23.120.200:389
+    base: dc=try,dc=com
+    username: cn=administrator,cn=users,dc=try,dc=com
+    password: PCIadmin!
+    base-environment:
+      java.naming.referral: follow
+
+  #ldap_config
+  #ldap配置信息，注意这里的userDn一定要写这种形式。referral设置为follow，说不清用途，似乎只有连接AD时才需要配置
+  #ldap.url=ldap://172.23.120.200:3268
+#ldap:
+#  url: ldap://172.23.120.200:389
+#  base: dc=try,dc=com
+#  userDn: cn=ZFF,cn=Users,dc=try,dc=com
+#  userPwd: admin
+#  referral: follow
+#  domainName: "@try.com"

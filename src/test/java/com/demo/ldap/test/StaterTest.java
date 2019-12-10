@@ -1,7 +1,11 @@
 package com.demo.ldap.test;
 
+import com.alibaba.fastjson.JSON;
 import com.demo.ldap.ApplicationTest;
+import com.demo.ldap.dao.UserRepository;
+import com.demo.ldap.entity.User;
 import com.demo.ldap.service.impl.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +18,16 @@ import javax.naming.Context;
  * @author ZhouFufeng
  * @since 2019/11/28
  **/
-
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationTest.class)
 public class StaterTest {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void getAllPersonNames() {
@@ -34,6 +41,28 @@ public class StaterTest {
 
     @Test
     public void getUserByLoginName() {
-        System.out.println(userService.getUserByLoginName("ZFF"));
+        String loginName = "ZFF";
+        User user=userRepository.findByLoginName(loginName);
+        System.out.println(user);
+
+//        System.out.println(JSON.toJSONString(userService.getUserByLoginName("ZFF")));
+    }
+
+
+    @Test
+    public void saveUser() {
+        User user = new User();
+        user.setLoginName("HHHH");
+        user.setUserName("HHH");
+        userRepository.save(user);
+    }
+
+    @Test
+    public void getUser() {
+        String loginName = "ZFF";
+        String password = "admin";
+        User user = userService.getUser(loginName, password);
+        System.out.println(JSON.toJSONString(user));
+        user.getRoles().forEach(System.out::println);
     }
 }

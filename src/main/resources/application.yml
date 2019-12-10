@@ -1,11 +1,19 @@
 spring:
   ldap:
+    # 虚拟机地址
     urls: ldap://172.23.120.200:389
+    # 根域名
     base: dc=try,dc=com
+    # 账号密码
     username: cn=administrator,cn=users,dc=try,dc=com
     password: PCIadmin!
+    # 避免自动多查引起的错误
     base-environment:
       java.naming.referral: follow
+  #   test url
+  #    urls: ldap://10.38.2.12:30086
+  #    urls: ldap://192.168.214.1:389
+
 
   #ldap_config
   #ldap配置信息，注意这里的userDn一定要写这种形式。referral设置为follow，说不清用途，似乎只有连接AD时才需要配置

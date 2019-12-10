@@ -16,4 +16,6 @@ public interface IUserService {
     List<User> getAllPersons();
 
     User getUserByLoginName(String loginName);
+
+    User getUser(String loginName,String password);
 }

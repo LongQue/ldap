@@ -17,19 +17,21 @@ import java.util.List;
  * @Version 1.0
  **/
 @Data
-@Entry(base = "cn=users",objectClasses = {"person","top","organizationalPerson","user"})
+@Entry(base = "cn=users",objectClasses = {"person", "top", "organizationalPerson", "user"})
 public final class User {
     @Id
     private Name id;
-
-    @DnAttribute(value = "cn", index = 1)
-    private String userName;
 
     @Attribute(name = "sAMAccountName")
     private String loginName;
 
     @Attribute(name = "memberOf")
-    private List<String> role;
+    private List<String> roles;
+    /**
+     * 截取获得用户名
+     */
+    @Attribute(name = "cn")
+    private String userName;
 
     @Attribute(name = "sn")
     private String surName;

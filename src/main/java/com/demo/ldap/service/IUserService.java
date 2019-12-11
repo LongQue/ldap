@@ -17,5 +17,5 @@ public interface IUserService {
 
     User getUserByLoginName(String loginName);
 
-    User getUser(String loginName,String password);
+    User getUser(String loginName,String password) throws Exception;
 }

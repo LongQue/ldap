@@ -2,5 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://E:/code-work/auth-server/src/main/resources/application-local.properties" charset="UTF-8" />
+    <file url="file://E:/code-work/hjmos/00公共/组件/trunk/auth-server/auth-server/src/main/resources/application-local.properties" charset="UTF-8" />
+    <file url="file://E:/code-work/hjmos/00公共/组件/trunk/auth-server/auth-server/src/main/resources/application-local.properties" charset="UTF-8" />
   </component>
 </project>

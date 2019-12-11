@@ -17,18 +17,30 @@ import java.util.List;
  * @Version 1.0
  **/
 @Data
+
+/**
+ * base与application的base组成默认路径。
+ * objectClasses默认查询条件
+ */
 @Entry(base = "cn=users",objectClasses = {"person", "top", "organizationalPerson", "user"})
 public final class User {
+    /**
+     * 截取除dc外的路径
+     */
     @Id
     private Name id;
-
+    /**
+     * 登录名，唯一，可作为查询条件 @Attribute设置字段映射
+     */
     @Attribute(name = "sAMAccountName")
     private String loginName;
-
+    /**
+     * 所属权限组，类似于角色概念
+     */
     @Attribute(name = "memberOf")
     private List<String> roles;
     /**
-     * 截取获得用户名
+     * 用户昵称
      */
     @Attribute(name = "cn")
     private String userName;

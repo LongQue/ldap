@@ -53,19 +53,21 @@ public class UserServiceImpl implements IUserService {
      * 一样无法获得密码，但可以通过ldapTemp用登录名和密码验证是否存在
      */
     @Override
-    public User getUser(String loginName,String password) {
+    public User getUser(String loginName,String password) throws Exception {
+        // 组装查询条件
         AndFilter filter = new AndFilter();
         filter.and(new EqualsFilter("sAMAccountName", loginName));
         // 以登录名获取用户存储路径
-        String fullBase;
-        fullBase = ldapTemplate.searchForContext(LdapQueryBuilder.query().filter(filter)).getNameInNamespace();
+        String fullBase=ldapTemplate.searchForContext(LdapQueryBuilder.query().filter(filter)).getNameInNamespace();
         // 获取中间段路径（该处查出的dc是小写）
+        // 如  cn=ZFF,cn=user,dc=try,dc=com ——> cn=ZFF,cn=user
         fullBase = fullBase.replace(",dc=try,dc=com", "");
+        //     cn=ZFF,cn=user ——> cn=users
         fullBase = fullBase.substring(fullBase.indexOf(',') + 1);
-        // 验证登录名和密码,若账号不存在、密码不对或禁用返回false
+        // 认证登录名和密码,若账号不存在、密码不对或禁用返回false
         boolean authPass = ldapTemplate.authenticate(fullBase, filter.encode(), password);
         if (!authPass) {
-            System.out.println("账号不符合条件");
+           throw new Exception("账号不符合条件");
         }
         return userRepository.findOne(LdapQueryBuilder.query().base(fullBase).filter(filter)).get();
     }

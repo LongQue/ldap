@@ -58,11 +58,14 @@ public class StaterTest {
     }
 
     @Test
-    public void getUser() {
+    public void getUser() throws Exception {
         String loginName = "ZFF";
         String password = "admin";
         User user = userService.getUser(loginName, password);
-        System.out.println(JSON.toJSONString(user));
+        System.out.println("id: "+user.getId());
+        System.out.println("loginName: "+user.getLoginName());
+        System.out.println("userName: "+user.getUserName());
+        System.out.println("roles:");
         user.getRoles().forEach(System.out::println);
     }
 }
